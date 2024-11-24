@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
+import Header from "@/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,13 +20,15 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <SignedOut>
-            <SignInButton />
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-          {children}
+          <Header />
+
+          <div className="flex min-h-screen">
+            {/* side bar */}
+
+            <div className="flex-1 p-4 bg-gray-100 overflow-y-auto">
+              {children}
+            </div>
+          </div>
         </body>
       </html>
     </ClerkProvider>
