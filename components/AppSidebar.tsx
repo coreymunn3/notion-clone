@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sidebar,
   SidebarContent,
@@ -5,16 +7,34 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
 } from "@/components/ui/sidebar";
+import { useTransition } from "react";
+import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 // icons
 import { FilePlus } from "lucide-react";
-import { Button } from "./ui/button";
+// actions
+import { createNewDocument } from "@/actions/actions";
 
 const AppSidebar = () => {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const handleCreateNewDocument = () => {
+    startTransition(async () => {
+      // create new document
+      const { docId } = await createNewDocument();
+      router.push(`/doc/${docId}`);
+    });
+  };
+
   const menuOptions = (
     <>
-      <Button className="w-full">
+      <Button
+        className="w-full"
+        onClick={handleCreateNewDocument}
+        disabled={isPending}
+      >
         {" "}
-        <FilePlus /> New Document
+        <FilePlus /> {isPending ? "Creating..." : "New Document"}
       </Button>
       <SidebarGroup>
         <SidebarGroupLabel>My Documents</SidebarGroupLabel>
