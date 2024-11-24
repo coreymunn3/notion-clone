@@ -4,14 +4,8 @@ import Header from "@/components/Header";
 
 export default function Home() {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <Header />
-        <main>
-          <p>main content</p>
-        </main>
-      </SidebarInset>
-    </SidebarProvider>
+    <main>
+      <p>main content</p>
+    </main>
   );
 }
