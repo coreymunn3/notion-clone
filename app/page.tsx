@@ -1,9 +1,17 @@
-import { Button } from "@/components/ui/button";
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import AppSidebar from "@/components/AppSidebar";
+import Header from "@/components/Header";
 
 export default function Home() {
   return (
-    <main className="">
-      <p>main</p>
-    </main>
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        <Header />
+        <main>
+          <p>main content</p>
+        </main>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }
