@@ -3,8 +3,11 @@
 import { useUser } from "@clerk/nextjs";
 import { SignInButton, SignedIn, UserButton, SignedOut } from "@clerk/nextjs";
 import { SidebarTrigger } from "./ui/sidebar";
+import { useRouter } from "next/navigation";
+import { Button } from "./ui/button";
 
 const Header = () => {
+  const router = useRouter();
   const { user } = useUser();
   return (
     <div className="flex items-center justify-between p-4">
@@ -12,10 +15,10 @@ const Header = () => {
       <div className="flex justify-center items-center">
         <SidebarTrigger className="mr-2" />
         {user && (
-          <h1>
+          <Button variant="ghost" onClick={() => router.push("/")}>
             {user.firstName}
             {`'s`} Space
-          </h1>
+          </Button>
         )}
       </div>
 
