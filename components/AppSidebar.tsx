@@ -5,42 +5,24 @@ import { useEffect, useState, useTransition, Fragment } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { useCollection } from "react-firebase-hooks/firestore";
-import {
-  collectionGroup,
-  DocumentData,
-  query,
-  where,
-} from "firebase/firestore";
+import { collectionGroup, query, where } from "firebase/firestore";
 import { db } from "@/firebase";
 // comps
 import {
   Sidebar,
   SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSkeleton,
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
+import AppSidebarGroup from "./AppSidebarGroup";
 // icons
 import { FilePlus } from "lucide-react";
 // actions
 import { createNewDocument } from "@/actions/actions";
-
-interface RoomDocument extends DocumentData {
-  createdAt: string;
-  role: "owner" | "editor";
-  roomId: string;
-  userId: string;
-}
-
-interface GroupedDocuments {
-  owner: RoomDocument[];
-  editor: RoomDocument[];
-}
+// interfaces
+import { RoomDocument, GroupedDocuments } from "./interfaces/interfaces";
 
 const AppSidebar = () => {
   const router = useRouter();
@@ -108,7 +90,7 @@ const AppSidebar = () => {
         <FilePlus /> {isPending ? "Creating..." : "New Document"}
       </Button>
 
-      {/* if documents are loading */}
+      {/* if documents are loading, show a skeleton */}
       {myDocsLoading && (
         <SidebarMenu>
           {Array.from({ length: 5 }).map((_, index) => (
@@ -123,38 +105,18 @@ const AppSidebar = () => {
         <Fragment>
           {/* my documents */}
           {groupedDocuments.owner.length > 0 && (
-            <SidebarGroup>
-              <SidebarGroupLabel>My Documents</SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  {groupedDocuments.owner.map((doc) => (
-                    <SidebarMenuItem key={doc.roomId}>
-                      <SidebarMenuButton variant={"outline"}>
-                        {doc.roomId}
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  ))}
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
+            <AppSidebarGroup
+              groupTitle="My Documents"
+              groupItems={groupedDocuments.owner}
+            />
           )}
 
           {/* shared with me */}
           {groupedDocuments.editor.length > 0 && (
-            <SidebarGroup>
-              <SidebarGroupLabel>Shared With Me</SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  {groupedDocuments.editor.map((doc) => (
-                    <SidebarMenuItem key={doc.roomId}>
-                      <SidebarMenuButton variant={"outline"}>
-                        {doc.roomId}
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  ))}
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
+            <AppSidebarGroup
+              groupTitle="Shared With Me"
+              groupItems={groupedDocuments.editor}
+            />
           )}
         </Fragment>
       )}
