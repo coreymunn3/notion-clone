@@ -5,6 +5,7 @@ import { SignInButton, SignedIn, UserButton, SignedOut } from "@clerk/nextjs";
 import { SidebarTrigger } from "./ui/sidebar";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
+import Breadcrumbs from "./Breadcrumbs";
 
 const Header = () => {
   const router = useRouter();
@@ -23,7 +24,7 @@ const Header = () => {
       </div>
 
       {/* bread crumbs to show current directory */}
-
+      <Breadcrumbs />
       {/* right side - signin controls */}
       <div>
         <SignedOut>
