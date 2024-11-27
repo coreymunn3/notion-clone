@@ -135,7 +135,7 @@ const AppSidebar = () => {
 
   return (
     <Sidebar variant="sidebar" className="z-0">
-      <SidebarContent className="p-4 mt-2">{menuOptions}</SidebarContent>
+      <SidebarContent className="p-2 md:p-4">{menuOptions}</SidebarContent>
     </Sidebar>
   );
 };

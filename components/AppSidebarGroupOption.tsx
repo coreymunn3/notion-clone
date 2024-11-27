@@ -12,12 +12,18 @@ const AppSidebarGroupOption = ({ href, id }: { href: string; id: string }) => {
   const pathname = usePathname();
   const isActivePage = href.includes(pathname) && pathname !== "/";
 
+  const defaultClass = "hover:bg-gray-100 hover:border hover:border-gray-300";
+
   if (data && !loading) {
     return (
       <SidebarMenuItem>
         <SidebarMenuButton
           variant={"outline"}
-          className={isActivePage ? "bg-blue-600 border-black border" : ""}
+          className={
+            isActivePage
+              ? `bg-gray-100 border border-gray-300 ${defaultClass}`
+              : defaultClass
+          }
           asChild
         >
           <Link href={href}>

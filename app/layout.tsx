@@ -27,7 +27,7 @@ export default function RootLayout({
             <AppSidebar />
             <SidebarInset>
               <Header />
-              {children}
+              <div className="p-2 md:p-4">{children}</div>
             </SidebarInset>
           </SidebarProvider>
           <Toaster />
