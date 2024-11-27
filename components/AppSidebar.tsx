@@ -4,6 +4,7 @@
 import { useEffect, useState, useTransition, Fragment } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
+import { useToast } from "@/hooks/use-toast";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { collectionGroup, query, where } from "firebase/firestore";
 import { db } from "@/firebase";
@@ -27,11 +28,11 @@ import { RoomDocument, GroupedDocuments } from "./interfaces/interfaces";
 const AppSidebar = () => {
   const router = useRouter();
   const { user } = useUser();
+  const { toast } = useToast();
   const [groupedDocuments, setGroupedDocuments] = useState<GroupedDocuments>({
     owner: [],
     editor: [],
   });
-  console.log(groupedDocuments);
   const [isPending, startTransition] = useTransition();
 
   /**
@@ -41,10 +42,16 @@ const AppSidebar = () => {
     startTransition(async () => {
       // create new document
       const { docId } = await createNewDocument();
+      // send toast
+      toast({ title: "Created Document" });
+      // change the page
       router.push(`/doc/${docId}`);
     });
   };
 
+  /**
+   * Get list of all documents for this user
+   */
   const [myDocs, myDocsLoading, myDocsError] = useCollection(
     user &&
       query(
