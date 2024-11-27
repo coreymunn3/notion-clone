@@ -1,11 +1,10 @@
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
-import AppSidebar from "@/components/AppSidebar";
-import Header from "@/components/Header";
+import { ArrowLeftCircleIcon } from "lucide-react";
 
 export default function Home() {
   return (
-    <main>
-      <p>main content</p>
+    <main className="flex space-x-2 items-center animate-pulse p-4">
+      <ArrowLeftCircleIcon className="w-12 h-12" />
+      <h1>Get started by creating a new Document!</h1>
     </main>
   );
 }

@@ -88,6 +88,9 @@ const AppSidebar = () => {
 
   const menuOptions = (
     <>
+      <div className="h-16 bg-black text-white italic flex items-center justify-center">
+        Logo/Branding
+      </div>
       <Button
         className="w-full"
         onClick={handleCreateNewDocument}
