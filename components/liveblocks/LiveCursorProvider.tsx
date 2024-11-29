@@ -1,17 +1,23 @@
 "use client";
 
 import { useMyPresence, useOthers } from "@liveblocks/react";
-import { PointerEvent } from "react";
+import { PointerEvent, useRef } from "react";
 import Cursor from "./Cursor";
 
 const LiveCursorProvider = ({ children }: { children: React.ReactNode }) => {
   const [myPresence, updateMyPresence] = useMyPresence();
   const others = useOthers();
+  const positionRef = useRef<HTMLDivElement>(null);
 
   // update my cursor presence
   const handlePointerMove = (e: PointerEvent<HTMLDivElement>) => {
-    const cursor = { x: Math.floor(e.pageX), y: Math.floor(e.pageY) };
-    updateMyPresence({ cursor });
+    if (positionRef.current) {
+      const rect = positionRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const cursor = { x, y };
+      updateMyPresence({ cursor });
+    }
   };
 
   // when I leave, remove my cursor
@@ -20,7 +26,12 @@ const LiveCursorProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <div onPointerMove={handlePointerMove} onPointerLeave={handlePointerLeave}>
+    <div
+      className="relative"
+      ref={positionRef}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
+    >
       {others
         .filter((other) => other.presence.cursor !== null)
         .map(({ connectionId, presence, info }) => (

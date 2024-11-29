@@ -13,10 +13,9 @@ const Cursor = ({ x, y, info }: CursorProps) => {
     <motion.div
       className="h-4 w-4 rounded-full absolute z-50"
       style={{
-        left: 0,
-        top: 0,
+        top: y,
+        left: x,
         pointerEvents: "none",
-        transform: `translateX(${x}px) translateY(${y}px)`,
       }}
       initial={{
         scale: 1,
