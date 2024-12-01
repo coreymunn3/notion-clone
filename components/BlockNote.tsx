@@ -23,7 +23,7 @@ function BlockNote({ doc, provider, darkMode }: EditorProps) {
       // Information for this user:
       user: {
         name: userInfo.name,
-        color: "#ff0b0b",
+        color: stringToColor(userInfo.email),
       },
     },
   });
