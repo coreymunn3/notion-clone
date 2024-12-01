@@ -13,7 +13,6 @@ import { MoonIcon, SunIcon } from "lucide-react";
 const Editor = () => {
   const room = useRoom();
   const [doc, setDoc] = useState<Y.Doc>();
-  console.log(doc);
   const [provider, setProvider] = useState<any>();
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
