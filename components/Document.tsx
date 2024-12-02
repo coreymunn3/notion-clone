@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import Editor from "./Editor";
 import useOwner from "@/lib/hooks/useOwner";
 import DeleteDocument from "./DeleteDocument";
+import InviteUser from "./InviteUser";
 
 const Document = ({ id }: { id: string }) => {
   const { toast } = useToast();
@@ -62,7 +63,7 @@ const Document = ({ id }: { id: string }) => {
         {isOwner && (
           <div className="space-x-2">
             <DeleteDocument docId={id} />
-            {/* <InviteUser docId={id} /> */}
+            <InviteUser docId={id} />
           </div>
         )}
       </div>

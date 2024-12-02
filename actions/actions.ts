@@ -63,6 +63,35 @@ export const deleteDocument = async (
     return { success: true };
   } catch (error) {
     console.error(error);
+    console.error(error);
+    return { success: false };
+  }
+};
+
+export const inviteUserToDocument = async (
+  docId: string,
+  email: string
+): Promise<{ success: boolean }> => {
+  auth.protect();
+
+  console.log(docId, email);
+
+  try {
+    // create a room for this user where they are the editor
+    await adminDb
+      .collection("users")
+      .doc(email)
+      .collection("rooms")
+      .doc(docId)
+      .set({
+        userId: email,
+        role: "editor",
+        createdAt: new Date(),
+        roomId: docId,
+      });
+    return { success: true };
+  } catch (error) {
+    console.error(error);
     return { success: false };
   }
 };
