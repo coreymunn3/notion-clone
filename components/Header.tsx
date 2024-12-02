@@ -10,6 +10,7 @@ import Breadcrumbs from "./Breadcrumbs";
 const Header = () => {
   const router = useRouter();
   const { user } = useUser();
+  console.log(user);
   return (
     <div className="flex items-center justify-between p-4">
       {/* left side - sidebar trigger & title */}
@@ -17,7 +18,7 @@ const Header = () => {
         <SidebarTrigger className="mr-2" />
         {user && (
           <Button variant="ghost" onClick={() => router.push("/")}>
-            {user.firstName}
+            {`${user?.firstName || user.emailAddresses}`}
             {`'s`} Space
           </Button>
         )}
