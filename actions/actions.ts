@@ -31,9 +31,11 @@ export async function createNewDocument() {
   return { docId: docRef.id };
 }
 
-export const deleteDocument = async (docId: string) => {
+export const deleteDocument = async (
+  docId: string
+): Promise<{ success: boolean }> => {
   auth.protect();
-  if (!docId) return;
+  if (!docId) return { success: false };
 
   // must delete in 2 places - in the document collection, and in every user room group
   try {
