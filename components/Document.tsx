@@ -11,6 +11,7 @@ import Editor from "./Editor";
 import useOwner from "@/lib/hooks/useOwner";
 import DeleteDocument from "./DeleteDocument";
 import InviteUser from "./InviteUser";
+import ManageUsers from "./ManageUsers";
 
 const Document = ({ id }: { id: string }) => {
   const { toast } = useToast();
@@ -49,7 +50,7 @@ const Document = ({ id }: { id: string }) => {
 
   return (
     <div className="max-w-4xl w-full mx-auto pb-5 flex-1 flex flex-col">
-      <div className="flex flex-row space-x-4">
+      <div className="flex flex-row space-x-4 mb-4">
         <form
           className="flex flex-1 space-x-2 justify-center"
           onSubmit={updateTitle}
@@ -70,9 +71,11 @@ const Document = ({ id }: { id: string }) => {
       {/* editable title */}
 
       {/* manage users, avatars */}
-      <div></div>
+      <div className="flex justify-end">
+        <ManageUsers docId={id} />
+      </div>
 
-      <hr className="my-8" />
+      <hr className="my-4" />
 
       <Editor />
 

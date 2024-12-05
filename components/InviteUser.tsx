@@ -47,7 +47,7 @@ const InviteUser = ({ docId }: { docId: string }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="secondary">
+        <Button variant="outline">
           <UserRoundPlus /> Invite
         </Button>
       </DialogTrigger>

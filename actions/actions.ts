@@ -74,8 +74,6 @@ export const inviteUserToDocument = async (
 ): Promise<{ success: boolean }> => {
   auth.protect();
 
-  console.log(docId, email);
-
   try {
     // create a room for this user where they are the editor
     await adminDb
@@ -92,6 +90,29 @@ export const inviteUserToDocument = async (
     return { success: true };
   } catch (error) {
     console.error(error);
+    return { success: false };
+  }
+};
+
+export const removeUserFromDocument = async (
+  docId: string,
+  userId: string
+): Promise<{ success: boolean }> => {
+  auth.protect();
+  // to avoid confusion: The userId that we created is actually the session claims email address.
+  // the term userId is a bit confusing here, so when we use it to filter users later, remember that this is actually an email address
+  const userEmail = userId;
+
+  try {
+    // delete the document from the user's rooms
+    await adminDb
+      .collection("users")
+      .doc(userEmail)
+      .collection("rooms")
+      .doc(docId)
+      .delete();
+    return { success: true };
+  } catch (error) {
     return { success: false };
   }
 };
