@@ -10,7 +10,7 @@ import Breadcrumbs from "./Breadcrumbs";
 const Header = () => {
   const router = useRouter();
   const { user } = useUser();
-  console.log(user);
+
   return (
     <div className="flex items-center justify-between p-4">
       {/* left side - sidebar trigger & title */}
