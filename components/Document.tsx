@@ -12,6 +12,7 @@ import useOwner from "@/lib/hooks/useOwner";
 import DeleteDocument from "./DeleteDocument";
 import InviteUser from "./InviteUser";
 import ManageUsers from "./ManageUsers";
+import Avatars from "./Avatars";
 
 const Document = ({ id }: { id: string }) => {
   const { toast } = useToast();
@@ -71,7 +72,8 @@ const Document = ({ id }: { id: string }) => {
       {/* editable title */}
 
       {/* manage users, avatars */}
-      <div className="flex justify-end">
+      <div className="w-full flex gap-2 justify-end">
+        <Avatars />
         <ManageUsers docId={id} />
       </div>
 

@@ -1,14 +1,12 @@
 "use client";
 import { useOthers, useSelf } from "@liveblocks/react/suspense";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "./ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useEffect, useState } from "react";
 
 const Avatars = () => {
   const users = useOthers();
