@@ -9,6 +9,7 @@ import { useRoom } from "@liveblocks/react/suspense";
 import BlockNote from "./BlockNote";
 import { Button } from "./ui/button";
 import { MoonIcon, SunIcon } from "lucide-react";
+import TranslateDocument from "./TranslateDocument";
 
 const Editor = () => {
   const room = useRoom();
@@ -41,8 +42,10 @@ const Editor = () => {
   return (
     <div className="w-full flex-1 flex flex-col">
       <div className="flex items-center gap-2 justify-end mb-8">
-        {/* CONTROLS: Translate AI, chat to document AI */}
-        <div></div>
+        {/* translate document */}
+        <div>
+          <TranslateDocument doc={doc} />
+        </div>
         {/* dark mode */}
         <div>
           <Button
