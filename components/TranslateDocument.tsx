@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "./ui/button";
+import BouncingLoader from "./BouncingLoader";
 import { Languages, Bot } from "lucide-react";
 import { FormEvent, useState, useTransition } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -33,25 +34,6 @@ const languages: string[] = [
   "russian",
   "japanese",
 ];
-
-const BouncingLoader = () => {
-  return (
-    <div className="flex items-center space-x-2">
-      <span
-        className="inline-block w-4 h-4 rounded-full bg-slate-500 animate-bounce"
-        style={{ animationDelay: "0s" }}
-      ></span>
-      <span
-        className="inline-block w-4 h-4 rounded-full bg-slate-500 animate-bounce"
-        style={{ animationDelay: "0.2s" }}
-      ></span>
-      <span
-        className="inline-block w-4 h-4 rounded-full bg-slate-500 animate-bounce"
-        style={{ animationDelay: "0.4s" }}
-      ></span>
-    </div>
-  );
-};
 
 const TranslateDocument = ({ doc }: { doc: Y.Doc }) => {
   const { toast } = useToast();
