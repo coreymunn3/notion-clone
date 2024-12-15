@@ -24,6 +24,7 @@ import { FilePlus } from "lucide-react";
 import { createNewDocument } from "@/actions/actions";
 // interfaces
 import { RoomDocument, GroupedDocuments } from "./interfaces/interfaces";
+import Image from "next/image";
 
 const AppSidebar = () => {
   const router = useRouter();
@@ -88,8 +89,8 @@ const AppSidebar = () => {
 
   const menuOptions = (
     <>
-      <div className="h-16 bg-black text-white italic flex items-center justify-center">
-        Logo/Branding
+      <div className="h-16 flex items-center justify-center">
+        <Image src={"/MagicBook.png"} alt="logo" width={300} height={100} />
       </div>
       <Button
         className="w-full"
