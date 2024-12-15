@@ -70,6 +70,8 @@ const TranslateDocument = ({ doc }: { doc: Y.Doc }) => {
         toast({
           title: "Your document has been summarized & translated!",
         });
+      } else {
+        console.error(res.statusText);
       }
     });
   };

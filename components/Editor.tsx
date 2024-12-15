@@ -10,6 +10,7 @@ import BlockNote from "./BlockNote";
 import { Button } from "./ui/button";
 import { MoonIcon, SunIcon } from "lucide-react";
 import TranslateDocument from "./TranslateDocument";
+import ChatToDocument from "./ChatToDocument";
 
 const Editor = () => {
   const room = useRoom();
@@ -43,7 +44,8 @@ const Editor = () => {
     <div className="w-full flex-1 flex flex-col">
       <div className="flex items-center gap-2 justify-end mb-8">
         {/* translate document */}
-        <div>
+        <div className="flex gap-2">
+          <ChatToDocument doc={doc} />
           <TranslateDocument doc={doc} />
         </div>
         {/* dark mode */}
